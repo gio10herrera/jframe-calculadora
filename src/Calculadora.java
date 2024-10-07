@@ -44,7 +44,19 @@ public class Calculadora {
         documentListenerTexField();
         sumar();
         restar();
+        multiplicar();
         resultado();
+    }
+
+    private static void multiplicar() {
+        btnMultiplicar.addActionListener(e -> {
+            operacion = "multiplicar";
+            x = Float.parseFloat(txtFieldCadena.getText());
+            txtFieldCadena.setText("");
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+        });
     }
 
     private static void restar() {
