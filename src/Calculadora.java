@@ -45,7 +45,18 @@ public class Calculadora {
         sumar();
         restar();
         multiplicar();
+        dividir();
         resultado();
+    }
+
+    private static void dividir() {
+        btnMultiplicar.addActionListener(e -> {
+            operacion = "dividir";
+            x = Float.parseFloat(txtFieldCadena.getText());
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+        });
     }
 
     private static void multiplicar() {
