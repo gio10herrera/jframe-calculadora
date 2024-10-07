@@ -3,6 +3,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculadora {
     static JFrame jFrameCalculadora;
@@ -27,7 +29,92 @@ public class Calculadora {
         jFrameCalculadora.add(panelBotones, BorderLayout.CENTER);
         jFrameCalculadora.setVisible(true);
         boton1();
+        boton2();
+        boton3();
+        boton4();
+        boton5();
+        boton6();
+        boton7();
+        boton8();
+        boton9();
+        botonPunto();
+        botonCero();
+        botonCe();
         documentListenerTexField();
+    }
+
+    private static void boton1() {
+        btn1.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "1");
+        });
+    }
+
+    private static void boton2() {
+        btn2.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "2");
+        });
+    }
+
+    private static void boton3() {
+        btn3.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "3");
+        });
+    }
+
+    private static void boton4() {
+        btn4.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "4");
+        });
+    }
+
+    private static void boton5() {
+        btn5.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "5");
+        });
+    }
+
+    private static void boton6() {
+        btn6.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "6");
+        });
+    }
+
+    private static void boton7() {
+        btn7.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "7");
+        });
+    }
+
+    private static void boton8() {
+        btn8.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "8");
+        });
+    }
+
+    private static void boton9() {
+        btn9.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "9");
+        });
+    }
+
+    private static void botonPunto() {
+        btnPunto.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + ".");
+            btnPunto.setEnabled(false);
+        });
+    }
+
+    private static void botonCero() {
+        btn0.addActionListener(e -> {
+            txtFieldCadena.setText(txtFieldCadena.getText() + "0");
+        });
+    }
+
+    private static void botonCe() {
+        btnCe.addActionListener(e -> {
+            txtFieldCadena.setText("");
+            btnPunto.setEnabled(true);
+        });
     }
 
     private static void documentListenerTexField() {
@@ -49,13 +136,9 @@ public class Calculadora {
 
             private void updateTextFieldValue(JTextField txtFieldCadena) {
                 textFieldValue = txtFieldCadena.getText();
-                System.out.println(textFieldValue);
+                System.out.print(textFieldValue + " ");
             }
         });
-    }
-
-    private static void boton1() {
-
     }
 
     private static void agregarComponentesAlPanelText() {
@@ -86,6 +169,7 @@ public class Calculadora {
     private static void instanciarComponentes() {
         txtFieldCadena = new JTextField();
         txtFieldCadena.setPreferredSize(new Dimension(50, 40));
+        txtFieldCadena.setEditable(false);
         btn1 = new JButton("1");
         btn2 = new JButton("2");
         btn3 = new JButton("3");
