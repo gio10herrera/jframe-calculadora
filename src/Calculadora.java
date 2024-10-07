@@ -11,11 +11,12 @@ public class Calculadora {
     static JLabel txtLabelX, txtLabelY, txtLabelResult;
     static JTextField txtFieldCadena;
     static JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPunto, btn0, btnCe, btnSumar, btnRestar, btnResultado, btnMultiplicar, btnDividir, btnC;
-    static float x, y, resultado;
+    static float x = 0, y = 0, resultado = 0;
     static JPanel panelBotones = new JPanel(new GridLayout(6, 3, 5, 5));
     static JPanel panelText = new JPanel();
     static String textFieldValue, operacion = "none";
     static boolean sw = false;
+    static int conResta = 0, contSuma = 0;
 
 
     public static void main(String[] args) {
@@ -47,17 +48,28 @@ public class Calculadora {
         multiplicar();
         dividir();
         resultado();
+        botonC();
+    }
+
+    private static void botonC() {
+        btnC.addActionListener(e -> {
+            x = 0;
+            txtFieldCadena.setText("");
+            conResta = 0;
+            contSuma = 0;
+        });
     }
 
     private static void dividir() {
-        btnMultiplicar.addActionListener(e -> {
+        btnDividir.addActionListener(e -> {
             asignarOperacion("dividir");
         });
     }
 
     private static void asignarOperacion(String op) {
         operacion = op;
-        x = Float.parseFloat(txtFieldCadena.getText());
+        //x = Float.parseFloat(txtFieldCadena.getText());
+        txtFieldCadena.setText("");
         if (!btnPunto.isEnabled()){
             btnPunto.setEnabled(true);
         }
@@ -71,32 +83,78 @@ public class Calculadora {
 
     private static void restar() {
         btnRestar.addActionListener(e -> {
+            if (conResta == 0){
+                x = Float.parseFloat(txtFieldCadena.getText()) - x;
+                conResta = 1;
+            } else {
+                //x -= Float.parseFloat(txtFieldCadena.getText());
+                switch (operacion){
+                    case "sumar" -> x += Float.parseFloat(txtFieldCadena.getText());
+                    case "restar" -> x -= Float.parseFloat(txtFieldCadena.getText());
+                    case "multiplicar" -> x *= Float.parseFloat(txtFieldCadena.getText());
+                    case "dividir" -> {
+                        if (Float.parseFloat(txtFieldCadena.getText()) != 0){
+                            x /= Float.parseFloat(txtFieldCadena.getText());
+                        }
+                    }
+                }
+            }
             asignarOperacion("restar");
         });
     }
 
     private static void sumar() {
         btnSumar.addActionListener(e -> {
+            if (contSuma == 0){
+                x += Float.parseFloat(txtFieldCadena.getText());
+                conResta = 1;
+                contSuma = 1;
+            } else {
+                switch (operacion){
+                    case "sumar" -> x += Float.parseFloat(txtFieldCadena.getText());
+                    case "restar" -> x -= Float.parseFloat(txtFieldCadena.getText());
+                    case "multiplicar" -> x *= Float.parseFloat(txtFieldCadena.getText());
+                    case "dividir" -> {
+                        if (Float.parseFloat(txtFieldCadena.getText()) != 0){
+                            x /= Float.parseFloat(txtFieldCadena.getText());
+                        }
+                    }
+                }
+            }
             asignarOperacion("sumar");
         });
     }
 
     private static void resultado() {
         btnResultado.addActionListener(e -> {
+            y = Float.parseFloat(txtFieldCadena.getText());
             switch (operacion) {
                 case "sumar" -> {
-                    y = Float.parseFloat(txtFieldCadena.getText());
                     resultado = x + y;
                     txtFieldCadena.setText(String.valueOf(resultado));
-                    if (!btnPunto.isEnabled()){
-                        btnPunto.setEnabled(true);
+                }
+                case "restar" -> {
+                    resultado = x - y;
+                    txtFieldCadena.setText(String.valueOf(resultado));
+                }
+                case "multiplicar" -> {
+                    resultado = x * y;
+                    txtFieldCadena.setText(String.valueOf(resultado));
+                }
+                case "dividir" -> {
+                    if ( y != 0) {
+                        resultado = x / y;
+                        txtFieldCadena.setText(String.valueOf(resultado));
                     }
-                    operacion = "none";
-                    x = 0;
-                    y = 0;
-                    resultado = 0;
                 }
             }
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+            operacion = "none";
+            x = resultado;
+            y = 0;
+            resultado = 0;
         });
     }
 
