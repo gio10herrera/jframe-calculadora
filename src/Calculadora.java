@@ -103,7 +103,7 @@ public class Calculadora {
     private static void multiplicar() {
         btnMultiplicar.addActionListener(e -> {
             if (contMultiplicacion == 0){
-                x *= Float.parseFloat(txtFieldCadena.getText());
+                x = Float.parseFloat(txtFieldCadena.getText());
                 conResta = 1;
                 contSuma = 1;
                 contMultiplicacion = 1;
