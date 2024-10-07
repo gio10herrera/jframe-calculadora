@@ -11,6 +11,17 @@ public class Calculadora {
     static JPanel panelText = new JPanel(new GridLayout(1, 1, 5, 5));
 
     public static void main(String[] args) {
-        
+        inicializarJFrameCalculadora();
+    }
+
+    private static void inicializarJFrameCalculadora() {
+        //creacion del JFrame
+        jFrameCalculadora = new JFrame();
+        jFrameCalculadora.setSize(400, 400);
+        //jFrameInterfaz.pack();
+        jFrameCalculadora.setLocationRelativeTo(null);
+        jFrameCalculadora.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrameCalculadora.setResizable(false);
+        jFrameCalculadora.setTitle("Calculadora");
     }
 }
