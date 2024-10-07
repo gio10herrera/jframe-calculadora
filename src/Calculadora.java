@@ -11,10 +11,11 @@ public class Calculadora {
     static JLabel txtLabelX, txtLabelY, txtLabelResult;
     static JTextField txtFieldCadena;
     static JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPunto, btn0, btnCe, btnSumar, btnRestar, btnResultado, btnMultiplicar, btnDividir, btnC;
-    static int x, y;
+    static float x, y, resultado;
     static JPanel panelBotones = new JPanel(new GridLayout(6, 3, 5, 5));
     static JPanel panelText = new JPanel();
-    static String textFieldValue;
+    static String textFieldValue, operacion = "none";
+    static boolean sw = false;
 
 
     public static void main(String[] args) {
@@ -41,6 +42,38 @@ public class Calculadora {
         botonCero();
         botonCe();
         documentListenerTexField();
+        sumar();
+        resultado();
+    }
+
+    private static void resultado() {
+        btnResultado.addActionListener(e -> {
+            switch (operacion) {
+                case "sumar" -> {
+                    y = Float.parseFloat(txtFieldCadena.getText());
+                    resultado = x + y;
+                    txtFieldCadena.setText(String.valueOf(resultado));
+                    if (!btnPunto.isEnabled()){
+                        btnPunto.setEnabled(true);
+                    }
+                    operacion = "none";
+                    x = 0;
+                    y = 0;
+                    resultado = 0;
+                }
+            }
+        });
+    }
+
+    private static void sumar() {
+        btnSumar.addActionListener(e -> {
+            operacion = "sumar";
+            x = Float.parseFloat(txtFieldCadena.getText());
+            txtFieldCadena.setText("");
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+        });
     }
 
     private static void boton1() {
@@ -193,7 +226,7 @@ public class Calculadora {
     private static void inicializarJFrameCalculadora() {
         //creacion del JFrame
         jFrameCalculadora = new JFrame();
-        jFrameCalculadora.setSize(400, 400);
+        jFrameCalculadora.setSize(300, 400);
         //jFrameInterfaz.pack();
         jFrameCalculadora.setLocationRelativeTo(null);
         jFrameCalculadora.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
