@@ -1,5 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 public class Calculadora {
@@ -10,6 +12,7 @@ public class Calculadora {
     static int x, y;
     static JPanel panelBotones = new JPanel(new GridLayout(6, 3, 5, 5));
     static JPanel panelText = new JPanel();
+    static String textFieldValue;
 
 
     public static void main(String[] args) {
@@ -23,6 +26,36 @@ public class Calculadora {
         jFrameCalculadora.add(panelText, BorderLayout.NORTH);
         jFrameCalculadora.add(panelBotones, BorderLayout.CENTER);
         jFrameCalculadora.setVisible(true);
+        boton1();
+        documentListenerTexField();
+    }
+
+    private static void documentListenerTexField() {
+        txtFieldCadena.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateTextFieldValue(txtFieldCadena);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateTextFieldValue(txtFieldCadena);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateTextFieldValue(txtFieldCadena);
+            }
+
+            private void updateTextFieldValue(JTextField txtFieldCadena) {
+                textFieldValue = txtFieldCadena.getText();
+                System.out.println(textFieldValue);
+            }
+        });
+    }
+
+    private static void boton1() {
+
     }
 
     private static void agregarComponentesAlPanelText() {
