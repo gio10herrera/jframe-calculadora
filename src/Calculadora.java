@@ -51,44 +51,33 @@ public class Calculadora {
 
     private static void dividir() {
         btnMultiplicar.addActionListener(e -> {
-            operacion = "dividir";
-            x = Float.parseFloat(txtFieldCadena.getText());
-            if (!btnPunto.isEnabled()){
-                btnPunto.setEnabled(true);
-            }
+            asignarOperacion("dividir");
         });
+    }
+
+    private static void asignarOperacion(String op) {
+        operacion = op;
+        x = Float.parseFloat(txtFieldCadena.getText());
+        if (!btnPunto.isEnabled()){
+            btnPunto.setEnabled(true);
+        }
     }
 
     private static void multiplicar() {
         btnMultiplicar.addActionListener(e -> {
-            operacion = "multiplicar";
-            x = Float.parseFloat(txtFieldCadena.getText());
-            txtFieldCadena.setText("");
-            if (!btnPunto.isEnabled()){
-                btnPunto.setEnabled(true);
-            }
+            asignarOperacion("multiplicar");
         });
     }
 
     private static void restar() {
         btnRestar.addActionListener(e -> {
-            operacion = "restar";
-            x = Float.parseFloat(txtFieldCadena.getText());
-            txtFieldCadena.setText("");
-            if (!btnPunto.isEnabled()){
-                btnPunto.setEnabled(true);
-            }
+            asignarOperacion("restar");
         });
     }
 
     private static void sumar() {
         btnSumar.addActionListener(e -> {
-            operacion = "sumar";
-            x = Float.parseFloat(txtFieldCadena.getText());
-            txtFieldCadena.setText("");
-            if (!btnPunto.isEnabled()){
-                btnPunto.setEnabled(true);
-            }
+            asignarOperacion("sumar");
         });
     }
 
