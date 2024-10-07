@@ -5,7 +5,7 @@ import java.awt.*;
 public class Calculadora {
     static JFrame jFrameCalculadora;
     static JLabel txtLabelX, txtLabelY, txtLabelResult;
-    static JTextField txtFieldX, txtFieldY, txtFieldResult;
+    static JTextField txtFieldCadena;
     static JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPunto, btn0, btnCe, btnSumar, btnRestar, btnResultado, btnMultiplicar, btnDividir, btnC;
     static int x, y;
     static JPanel panelBotones = new JPanel(new GridLayout(6, 3, 5, 5));
@@ -16,6 +16,15 @@ public class Calculadora {
         instanciarComponentes();
         panelBotones.setBorder(new EmptyBorder(5, 5, 5, 5));
         agregarComponentesAlPanelBotones();
+        panelText.setBorder(new EmptyBorder(5, 5, 5, 5));
+        agregarComponentesAlPanelText();
+        jFrameCalculadora.add(panelText, BorderLayout.NORTH);
+        jFrameCalculadora.add(panelBotones, BorderLayout.SOUTH);
+        jFrameCalculadora.setVisible(true);
+    }
+
+    private static void agregarComponentesAlPanelText() {
+        panelText.add(txtFieldCadena);
     }
 
     private static void agregarComponentesAlPanelBotones() {
@@ -40,6 +49,7 @@ public class Calculadora {
     }
 
     private static void instanciarComponentes() {
+        txtFieldCadena = new JTextField();
         btn1 = new JButton("1");
         btn2 = new JButton("2");
         btn3 = new JButton("3");
