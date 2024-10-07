@@ -16,7 +16,7 @@ public class Calculadora {
     static JPanel panelText = new JPanel();
     static String textFieldValue, operacion = "none";
     static boolean sw = false;
-    static int conResta = 0, contSuma = 0;
+    static int conResta = 0, contSuma = 0, contMultiplicacion = 0, contDivision = 0;
 
 
     public static void main(String[] args) {
@@ -54,14 +54,39 @@ public class Calculadora {
     private static void botonC() {
         btnC.addActionListener(e -> {
             x = 0;
+            y = 0;
             txtFieldCadena.setText("");
             conResta = 0;
             contSuma = 0;
+            contMultiplicacion = 0;
+            contDivision = 0;
+            resultado = 0;
         });
     }
 
     private static void dividir() {
         btnDividir.addActionListener(e -> {
+            if (contDivision == 0){
+                if (Float.parseFloat(txtFieldCadena.getText()) != 0){
+                    x = Float.parseFloat(txtFieldCadena.getText());
+                    conResta = 1;
+                    contSuma = 1;
+                    contMultiplicacion = 1;
+                    contDivision = 1;
+                }
+            } else {
+                //x -= Float.parseFloat(txtFieldCadena.getText());
+                switch (operacion){
+                    case "sumar" -> x += Float.parseFloat(txtFieldCadena.getText());
+                    case "restar" -> x -= Float.parseFloat(txtFieldCadena.getText());
+                    case "multiplicar" -> x *= Float.parseFloat(txtFieldCadena.getText());
+                    case "dividir" -> {
+                        if (Float.parseFloat(txtFieldCadena.getText()) != 0){
+                            x /= Float.parseFloat(txtFieldCadena.getText());
+                        }
+                    }
+                }
+            }
             asignarOperacion("dividir");
         });
     }
@@ -77,6 +102,25 @@ public class Calculadora {
 
     private static void multiplicar() {
         btnMultiplicar.addActionListener(e -> {
+            if (contMultiplicacion == 0){
+                x *= Float.parseFloat(txtFieldCadena.getText());
+                conResta = 1;
+                contSuma = 1;
+                contMultiplicacion = 1;
+                contDivision = 1;
+            } else {
+                //x -= Float.parseFloat(txtFieldCadena.getText());
+                switch (operacion){
+                    case "sumar" -> x += Float.parseFloat(txtFieldCadena.getText());
+                    case "restar" -> x -= Float.parseFloat(txtFieldCadena.getText());
+                    case "multiplicar" -> x *= Float.parseFloat(txtFieldCadena.getText());
+                    case "dividir" -> {
+                        if (Float.parseFloat(txtFieldCadena.getText()) != 0){
+                            x /= Float.parseFloat(txtFieldCadena.getText());
+                        }
+                    }
+                }
+            }
             asignarOperacion("multiplicar");
         });
     }
@@ -86,6 +130,9 @@ public class Calculadora {
             if (conResta == 0){
                 x = Float.parseFloat(txtFieldCadena.getText()) - x;
                 conResta = 1;
+                contSuma = 1;
+                contMultiplicacion = 1;
+                contDivision = 1;
             } else {
                 //x -= Float.parseFloat(txtFieldCadena.getText());
                 switch (operacion){
@@ -109,6 +156,8 @@ public class Calculadora {
                 x += Float.parseFloat(txtFieldCadena.getText());
                 conResta = 1;
                 contSuma = 1;
+                contMultiplicacion = 1;
+                contDivision = 1;
             } else {
                 switch (operacion){
                     case "sumar" -> x += Float.parseFloat(txtFieldCadena.getText());
