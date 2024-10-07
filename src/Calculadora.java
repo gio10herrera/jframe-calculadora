@@ -43,7 +43,30 @@ public class Calculadora {
         botonCe();
         documentListenerTexField();
         sumar();
+        restar();
         resultado();
+    }
+
+    private static void restar() {
+        btnRestar.addActionListener(e -> {
+            operacion = "restar";
+            x = Float.parseFloat(txtFieldCadena.getText());
+            txtFieldCadena.setText("");
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+        });
+    }
+
+    private static void sumar() {
+        btnSumar.addActionListener(e -> {
+            operacion = "sumar";
+            x = Float.parseFloat(txtFieldCadena.getText());
+            txtFieldCadena.setText("");
+            if (!btnPunto.isEnabled()){
+                btnPunto.setEnabled(true);
+            }
+        });
     }
 
     private static void resultado() {
@@ -61,17 +84,6 @@ public class Calculadora {
                     y = 0;
                     resultado = 0;
                 }
-            }
-        });
-    }
-
-    private static void sumar() {
-        btnSumar.addActionListener(e -> {
-            operacion = "sumar";
-            x = Float.parseFloat(txtFieldCadena.getText());
-            txtFieldCadena.setText("");
-            if (!btnPunto.isEnabled()){
-                btnPunto.setEnabled(true);
             }
         });
     }
