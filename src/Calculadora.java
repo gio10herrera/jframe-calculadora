@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Calculadora {
@@ -13,6 +14,29 @@ public class Calculadora {
     public static void main(String[] args) {
         inicializarJFrameCalculadora();
         instanciarComponentes();
+        panelBotones.setBorder(new EmptyBorder(5, 5, 5, 5));
+        agregarComponentesAlPanelBotones();
+    }
+
+    private static void agregarComponentesAlPanelBotones() {
+        panelBotones.add(btn1);
+        panelBotones.add(btn2);
+        panelBotones.add(btn3);
+        panelBotones.add(btn4);
+        panelBotones.add(btn5);
+        panelBotones.add(btn6);
+        panelBotones.add(btn7);
+        panelBotones.add(btn8);
+        panelBotones.add(btn9);
+        panelBotones.add(btnPunto);
+        panelBotones.add(btn0);
+        panelBotones.add(btnCe);
+        panelBotones.add(btnSumar);
+        panelBotones.add(btnRestar);
+        panelBotones.add(btnResultado);
+        panelBotones.add(btnMultiplicar);
+        panelBotones.add(btnDividir);
+        panelBotones.add(btnC);
     }
 
     private static void instanciarComponentes() {
